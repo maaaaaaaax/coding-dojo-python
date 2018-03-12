@@ -1,0 +1,17 @@
+<html>
+    <head>
+       <title>Form Test Index</title>
+    </head>
+    <body>
+      <h1>Index Page</h1>
+      <h3>Create a User</h3>
+      <!-- read on to learn about form actions, we'll talk about the method in a later section -->
+      <!-- The form's action attribute will be set equal to the route where the information, contained within the form, will be sent to.  -->
+      <!-- Method: There are two values that you will see this attribute being set to: GET and POST.  -->
+      <form action='/users' method='post'>
+          <!-- Each must be assigned a name attribute if you want each input to be recognized by your server-side code. When the HTML form gathers up your data it will create a set of key/value pairs with the name attributes as the keys and the data the user enters as the values. -->
+          Name: <input type='text' name='name'>
+          <input type='submit' value='create user'>
+      </form>
+    </body>
+</html>
