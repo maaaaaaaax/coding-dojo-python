@@ -1,0 +1,30 @@
+<html>
+    <head>
+       <title>Great Number Game | Flask Fundamentals</title>
+       <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='styles.css')}}">
+    </head>
+    <body>
+      <h3>Welcome to the Great Number Game!</h3>
+      <p>I am thinking of a number between 1 and 100</p>
+      <p>Take a guess!</p>
+      {%  if session.display_guess == "high": %}
+              <div class='badguess'>Too High!!</div>
+      {%  elif session.display_guess == "low": %}
+              <div class='badguess'>Too Low!!</div>
+      {%  elif session.display_guess == "correct": %}
+              <div class='correct'>
+                  <h2>{{ session['random_number'] }} was the number!</h2>
+                  <a href="/reset"><button>Play Again?</button></a>
+              </div>
+      {%  else: %}
+              <div></div>
+      {%  endif %}
+
+      <form action='/submit_guess' method='post'>
+          <!-- Each must be assigned a name attribute if you want each input to be recognized by your server-side code. When the HTML form gathers up your data it will create a set of key/value pairs with the name attributes as the keys and the data the user enters as the values. -->
+          <input type='text' name='guess'>
+          <input type='submit' value='submit'>
+      </form>
+
+    </body>
+</html>

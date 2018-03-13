@@ -1,0 +1,42 @@
+<html>
+    <head>
+       <title>Dojo Survey Index</title>
+    </head>
+    <body>
+      <!-- read on to learn about form actions, we'll talk about the method in a later section -->
+      <!-- The form's action attribute will be set equal to the route where the information, contained within the form, will be sent to.  -->
+      <!-- Method: There are two values that you will see this attribute being set to: GET and POST.  -->
+      <form action='/survey_submit' method='post'>
+          <!-- Each must be assigned a name attribute if you want each input to be recognized by your server-side code. When the HTML form gathers up your data it will create a set of key/value pairs with the name attributes as the keys and the data the user enters as the values. -->
+          Name: <input type='text' name='name'>
+
+          <!-- Another option is a dropdown menu, which uses <select> and <option> tags. -->
+
+          <select name="location">
+              <option value="SanJose">San Jose</option>
+              <option value="Seattle">Seattle</option>
+          </select>
+          <select name="language">
+              <option value="HTML">HTML</option>
+              <option value="CSS">CSS</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="Python">Python</option>
+          </select>
+
+          <!-- When the user might want to enter longer text. This can be used in forums for comments, or for user profile descriptions.
+          In this case we use the <textarea> tag. -->
+
+          <textarea name="comment"></textarea>
+          <input type='submit' value='comment'>
+      </form>
+      <div>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <p>{{message}}</p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      </div>
+    </body>
+</html>

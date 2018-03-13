@@ -109,9 +109,42 @@ return render_template("index.html", name="Jay")
 
 # There are 2 special inputs that we can use to insert Python-like code into our Flask templates. We should be clear that the code we can inject into templates is limited. We cannot use the full range of Python's functionality in our templates. Most of what you've learned so far can be used in your templates, but some of Python's more advanced functionality is missing.
 
-{{ some variable }}
-{% some expression %}
+# {{ some variable }}
+# {% some expression %}
 
 # Let's see this in action. First, create a new project directory called test_templates. Place a server.py file and a templates directory inside this directory.
 
-Build a basic server.py file:
+
+
+# HIDDEN INPUTS
+
+# A hidden input is just an ordinary input element but has a type of "hidden", which means there will be no visual representation in the rendered HTML, but the form element IS usable by the method where the form is sent.
+
+<input type="hidden" name="action" value="register">
+
+# Suppose we have two forms within our index page:
+
+<form method="post" action="/process">
+    <input type="hidden" name="action" value="register">
+    <input type="text" name="first_name">
+    <input type="text" name="last_name">
+    <input type="text" name="email">
+    <input type="password" name="password">
+    <input type="submit" value="Register">
+</form>
+<form method="post" action="/process">
+    <input type="hidden" name="action" value="login">
+    <input type="text" name="email">
+    <input type="password" name="password">
+    <input type="submit" value="Login">
+</form>
+
+#
+# In the POST /process route, make sure that you have an if statement that checks what form is being submitted:
+
+if request.form['action'] == 'register':
+  //do registration process
+elif request.form['action'] == 'login':
+  //do login process
+
+# By using the hidden input fields we set up on the index page, we can be sure that only the codes related to the form being submitted are going to be executed.
