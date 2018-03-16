@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title>Logged In</title>
+  </head>
+  <body>
+    {% if session['source'] == "sign_up"  %}
+    <div>
+      <p>The user information you entered for {{ session.current_user_email }} has been stored successsfully.</p>
+    </div>
+    {% else %}
+    <div>
+    <h3>Welcome back!</h3>
+      <p>First Name: {{ session['current_user_info'][0]['first_name'] }}</p>
+      <p>Last Name: {{ session['current_user_info'][0]['last_name'] }}</p>
+      <p>Email: {{ session['current_user_info'][0]['email'] }}</p>
+    {% endif %}
+    </div>
+  </body>
+</html>
