@@ -58,3 +58,222 @@ Simple Data Types:
   • Used to store a large amount of text, like a description, message, or comment. Use this for any text that VARCHAR() is too small to handle.
 • DATETIME
   • used to store a date and time in the format YYYY-MM-DD hh:mm:ss
+
+
+Use homebrew to install MySQL.
+brew install mysql
+Use homebrew to start your MySQL Server as a  "service", meaning it will run in the background and allow connections.
+brew services start mysql
+Now with MySQL installed, you have access to some new command line tools. Run the following command to set the MySQL root user's password to "root".
+mysqladmin -u root password "root"
+mysql -u root -p
+
+
+SELECT *  FROM tweets
+
+Show the first name and last name
+SELECT first_name, last_name FROM users
+
+Show the first name of the second and third user
+SELECT first_name FROM users
+WHERE id = 2 OR id = 3
+
+SELECT * FROM users
+WHERE id > 2;
+
+all of the users with first names ending in "e"
+SELECT *
+FROM users
+WHERE first_name LIKE "%e";
+
+all of the users with first names starting in "K"
+SELECT *
+FROM users
+WHERE first_name LIKE "K%";
+
+SELECT w/ Sorting
+all of the users with the youngest users at the top of the table
+SELECT *
+FROM users
+ORDER BY birthday DESC;
+
+all of the users with the oldest users at the top of the table
+SELECT *
+FROM users
+ORDER BY birthday ASC;
+
+only the first names of all of the users in alphabetical order
+SELECT first_name
+FROM users
+ORDER BY first_name;
+
+SELECT handle FROM users
+	WHERE first_name = 'Kobe'
+output is kobebryant
+
+IN allows us to check if an item is in a list.
+SELECT name, population FROM world
+  WHERE name IN ('Sweden', 'Norway', 'Denmark');
+
+BETWEEN allows range checking (range specified is inclusive of boundary values).
+SELECT name, area FROM world
+  WHERE area BETWEEN 200000 AND 250000
+
+Find the country that start with Y
+SELECT name FROM world
+  WHERE name LIKE 'F%'
+
+Find the countries that end with y
+SELECT name FROM world
+  WHERE name LIKE 'T%'
+
+Find the countries that contain the letter x
+SELECT name FROM world
+  WHERE name LIKE '%x%'
+
+Find the countries that start with C and end with ia
+SELECT name FROM world
+  WHERE name LIKE '%ia' AND name LIKE 'C%'
+
+Find the countries that have three or more a in the name
+SELECT name FROM world
+  WHERE name LIKE '%a%a%a%'
+
+Find the countries that have "t" as the second character.
+SELECT name FROM world
+ WHERE name LIKE '_t%'
+ORDER BY name
+
+Find the countries that have two "o" characters separated by two others.
+SELECT name FROM world
+ WHERE name LIKE '%o__o%'
+
+Find the countries that have exactly four characters.
+SELECT name FROM world
+ WHERE name LIKE '____'
+
+Find the country where the name is the capital city.
+SELECT name
+  FROM world
+ WHERE name LIKE capital
+
+
+The SQL command pattern for INSERTing records is as follows:
+INSERT INTO table_name (column_name1, column_name2)
+VALUES('column1_value', 'column2_value');
+
+Ex:
+INSERT INTO emails (email, created_at, updated_at)
+VALUES('tejas@tejas.com',NOW(),NOW());
+
+Ex2:
+INSERT INTO emails (email, created_at, updated_at)
+VALUES('sam@sam.com',NOW(),NOW()),('ashley@ashley.com',NOW(),NOW());
+
+Updating Records
+UPDATE table_name SET column_name1 = 'some_value', column_name2='another_value' WHERE condition(s)
+UPDATE users SET first_ = "Kobe" WHERE id = 1;
+
+Deleting
+DELETE FROM table_name WHERE condition(s)
+DELETE FROM 'twitter'.'tweets' WHERE 'id'='13';
+
+FUNCTIONS
+SELECT CONCAT('Mr. ', first_name, ' ', last_name) FROM clients
+whatever we select becomes the name of the column
+SELECT CONCAT('Mr. ', first_name, ' ', last_name) AS full_name FROM clients
+
+# provide a parameter as the first argument, and it separates the output with that character
+SELECT CONCAT_WS(' ',Mr.', first_name, last_name) FROM clients
+
+# length
+SELECT LENGTH(last_name) AS last_len FROM clients;
+
+# print all leters in lowercase
+SELECT LOWER(first_name) AS first_lowercase FROM clients;
+
+Time functions
+
+SELECT HOUR(joined_datetime) AS date_hour FROM clients;
+
+SELECT DAYNAME(joined_datetime) AS day_name FROM clients;
+
+SELECT MONTH(joined_datetime) AS month_number FROM clients;
+
+SELECT NOW() AS right_now;
+
+SELECT DATE_FORMAT(joined_datetime, '%W %M %e, %Y') FROM clients
+
+Joining tables
+
+
+If hashing isn't reversible, how can we match passwords? The same input into a hashing algorithm always produces the same output. In practical terms this means that we can store a hashed password, re-hash a user's input on login and compare the two hashed values in order to authenticate passwords.
+
+One of the most basic hashing algorithms is known as md5. Md5 is an algorithm that takes a value (most likely a password) and returns a hashed string. To see how this works, type the following into a new Python document:
+import md5 # imports the md5 module to generate a hash
+password = 'password'
+# encrypt the password we provided as 32 character string
+hashed_password = md5.new(password).hexdigest()
+print hashed_password #this will show you the hashed value
+# 5f4dcc3b5aa765d61d8327deb882cf99 -> nice!
+
+How to use md5
+When you add your users to the database upon registration, you should save their passwords as an hashed md5 string. Similarly, when they log in, you should hash the input password to make sure it matches with the one saved in the database. Here's the idea:
+
+The user being put into your database:
+
+import md5 # do this at the top of your file where you import modules
+@app.route('/users/create', methods=['POST'])
+def create_user():
+     username = request.form['username']
+     email = request.form['email']
+     password = md5.new(request.form['password']).hexdigest()
+     insert_query = "INSERT INTO users (username, email, password, created_at, updated_at) VALUES (:username,
+     :email, :password, NOW(), NOW())"
+     query_data = { 'username': username, 'email': email, 'password': password }
+     mysql.query_db(insert_query, query_data)
+
+When your user is trying to log in:
+
+password = md5.new(request.form['password']).hexdigest()
+email = request.form['email']
+user_query = "SELECT * FROM users where users.email = :email AND users.password = :password"
+query_data = { 'email': email, 'password': password}
+user = mysql.query_db(user_query, query_data)
+# do the necessary logic to login if the user exists, otherwise redirect to login page with error message<br>
+
+A salt is a string of random characters that will be passed to a hashing method (an md5()) along with the string we are trying to hash (the submitted password) via concatenation. The hashing method that uses the salt is designed in such a way that it takes the salt to compute the hashed string, using the salt as an 'ingredient' in the hashing 'recipe'.
+
+Generating a salt
+To generate a salt, you just need to generate a random string of characters. The code below actually uses two different functions to create a random string:
+
+import os, binascii # include this at the top of your file
+salt = binascii.b2a_hex(os.urandom(15))
+
+The function called os.urandom() returns a string of bytes. The number of bytes is equal to the parameter provided. This string isn't a normal alphanumeric string, so we turn it into a string using the function b2a_hex(), which will turn the value into a normal alphanumeric string. This new random string will be our salt. The idea is to store this salt during the registration process. Example:
+
+username = request.form['username']
+email = request.form['email']
+password = request.form['password']
+salt =  binascii.b2a_hex(os.urandom(15))
+hashed_pw = md5.new(password + salt).hexdigest()
+insert_query = "INSERT INTO users (username, email, password, salt, created_at, updated_at)
+     VALUES (:username, :email, :hashed_pw, :salt, NOW(), NOW())"
+query_data = { 'username': username, 'email': email, 'hashed_pw': hashed_pw, 'salt': salt}
+mysql.query_db(insert_query, query_data)
+
+Now, when we are trying to authenticate a user's login, we do some pretty nifty stuff:
+
+email = request.form['email']
+password = request.form['password']
+user_query = "SELECT * FROM users WHERE users.email = :email LIMIT 1"
+query_data = {'email': email}
+user = mysql.query_db(user_query, query_data)
+if len(user) != 0:
+ encrypted_password = md5.new(password + user[0]['salt']).hexdigest()
+ if user[0]['password'] == encrypted_password:
+  # this means we have a successful login!
+ else:
+     # invalid password!
+else:
+  # invalid email!

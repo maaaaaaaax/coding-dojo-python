@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Success Page</title>
+  </head>
+  <body>
+    <div>
+      <p>The email you entered ({{ new_email }}) has been stored successsfully.
+    </div>
+    <div>
+    {% if all_emails: %}
+    <h3>Email addresses entered:</h3>
+      {% for email in all_emails: %}
+         <p>Email: {{ email['email'] }}</p>
+         <p>{{ email['updated_at'] }}</p>
+         <hr>
+      {% endfor %}
+    {% endif %}
+    </div>
+  </body>
+</html>
