@@ -43,6 +43,11 @@ python ../manage.py startapp {{ name of app }}
 9. Run the server - change to main folder (parent of manage.py)
 python manage.py runserver
 
+10. Write the app. When mostly done, turn off server, turn on session with:
+# Need to be in same directory as manage.py file
+> python manage.py makemigrations
+> python manage.py migrate
+
 
 Notes
 

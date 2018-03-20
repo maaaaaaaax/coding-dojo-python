@@ -1,0 +1,28 @@
+<!-- HTML & JavaScript code by Max Wiederholt (max.wiederholt@gmail.com) -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Django Intro | Time Display</title>
+    <meta name="description" content="Hi, Google! | HTML & JavaScript by Max Wiederholt (max.wiederholt@gmail.com) for Coding Dojo.">
+    <!--
+
+    Create a Django app called time_display according to the below wireframe.
+
+    -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="javascript-filename.js"></script> -->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/time_display/styles.css">
+  </head>
+  <body>
+    <div class="main-content-wrapper">
+      <p class="main-content">The current time and date:</p>
+      <div class="main-content">
+        <p class="clock">{{ clock_date }}</p>
+        <p class="clock"> {{ clock_hour_minute }}</p>
+      </div>
+    </div>
+  </body>
+</html>

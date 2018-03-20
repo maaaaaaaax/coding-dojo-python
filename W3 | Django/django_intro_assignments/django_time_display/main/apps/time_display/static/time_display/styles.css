@@ -1,0 +1,15 @@
+/* CSS styles for internet-css assignment by Max Wiederholt (max.wiederholt@gmail.com) */
+
+* {
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    font-family: 'Ubuntu', sans-serif;
+}
+.main-content {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
