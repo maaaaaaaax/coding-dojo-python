@@ -31,11 +31,11 @@ django-admin startproject {{ project name - can be main }}
 
 4. Change directory to main inside that project.
 
-5. Create an apps folder inside main.
+5. Create an apps folder (at the same level as main and manage.py).
 
 6. Create a file named __init__.py inside apps inside {{ project name directory }}
 
-7. Navigate inside apps folder and create a new app.
+7. From inside apps folder, create a new app by running:
 python ../manage.py startapp {{ name of app }}
 
 8. After creating an app, cd to main inside the project, in settings.py, add the app you just created
