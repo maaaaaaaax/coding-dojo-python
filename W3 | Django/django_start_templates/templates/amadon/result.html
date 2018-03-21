@@ -1,0 +1,25 @@
+<html>
+    <head>
+       <title>Dojo Survey Index</title>
+       <link rel="stylesheet" href="../../static/survey_form/styles.css">       
+    </head>
+    <body>
+      <h3>Submitted Info</h3>
+      <div>
+        {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+              <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      <!-- read on to learn about form actions, we'll talk about the method in a later section -->
+      <!-- The form's action attribute will be set equal to the route where the information, contained within the form, will be sent to.  -->
+      <!-- Method: There are two values that you will see this attribute being set to: GET and POST.  -->
+      <p>Your name: {{request.session.name}}</p>
+      <p>Dojo Location: {{request.session.location}}</p>
+      <p>Favorite Language: {{request.session.language}}</p>
+      <p>Comment: {{request.session.comment}}</p>
+    </body>
+</html>

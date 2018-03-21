@@ -40,10 +40,12 @@ python ../manage.py startapp {{ name of app }}
 
 8. After creating an app, cd to main inside the project, in settings.py, add the app you just created
 
-9. Run the server - change to main folder (parent of manage.py)
+9. Add the templates (html) folder, static (css, javascript) folder, and the urls.py folder to the app's folder
+
+10. Run the server - change to main folder (parent of manage.py)
 python manage.py runserver
 
-10. Write the app. When mostly done, turn off server, turn on session with:
+11. Write the app. When mostly done, turn off server, turn on session with:
 # Need to be in same directory as manage.py file
 > python manage.py makemigrations
 > python manage.py migrate
@@ -70,7 +72,7 @@ Here is a cheat sheet for expressions you'll be using regularly:
 
 
 Tabs for when working with Django:
-1. setting.py (dir: main)
-2. urls.py (dir: main)
-3. urls.py (dir: apps/first_app)
-4. views.py (dir: apps/first_app)
+1. urls.py (dir: main)
+2. urls.py (dir: apps/first_app)
+3. views.py (dir: apps/first_app)
+4 - xx. HTML & CSS / front-end 

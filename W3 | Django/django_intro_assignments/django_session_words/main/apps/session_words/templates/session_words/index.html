@@ -1,0 +1,57 @@
+<!-- HTML & JavaScript code by Max Wiederholt (max.wiederholt@gmail.com) -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Django Intro | Session Words</title>
+    <meta name="description" content="Hi, Google! | HTML, CSS and Python by Max Wiederholt (max.wiederholt@gmail.com) for Coding Dojo.">
+    <!--
+
+    Create a Django app called time_display according to the below wireframe.
+
+    -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="javascript-filename.js"></script> -->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/session_words/styles.css">
+  </head>
+  <body>
+    <div>
+      <form action='/submit' method='post'>
+          {% csrf_token %}
+          <h3>Add a new word </h3>
+          <input type='text' name='word'>
+          <p>Choose a color</p>
+          <div class="list">
+            <input type="radio" id="red" name="color" value="red">
+            <label for="red">Red</label>
+          </div>
+          <div class="list">
+            <input type="radio" id="green" name="color" value="green">
+            <label for="green">Green</label>
+          </div>
+          <div class="list">
+            <input type="radio" id="blue" name="color" value="blue">
+            <label for="blue">Blue</label>
+          </div>
+
+          <input type="checkbox" name="size" value="size">
+          <label for="size">show in BIG fonts!</label>
+
+          <div class="list">
+            <input type='submit' name='add' value='Add to Session'>
+          </div>
+      </form>
+    </div>
+    <div>
+      <form action="/reset" method="post">
+  			{% csrf_token %}
+        <div class="list">
+  			     <input type="submit" name="clear" value="Clear Session">
+        </div>
+  		</form>
+  		{{request.session.toAdd | safe}}
+    </div>
+  </body>
+</html>

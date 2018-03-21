@@ -1,0 +1,1 @@
+Note: if you want to use this project, please first decompress the file django_random_word.zip and replace all the files inside with the decompressed files. The files that haven't been compressed aren't accurate.

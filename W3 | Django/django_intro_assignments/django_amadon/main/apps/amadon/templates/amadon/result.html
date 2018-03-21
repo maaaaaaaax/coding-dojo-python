@@ -1,0 +1,29 @@
+<html>
+    <head>
+       <title>Amadon Checkout</title>
+       <link rel="stylesheet" href="../../static/amadon/styles.css">
+    </head>
+    <body>
+      <h3>Thank you for your business!</h3>
+      <div>
+        {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+              <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      <!-- read on to learn about form actions, we'll talk about the method in a later section -->
+      <!-- The form's action attribute will be set equal to the route where the information, contained within the form, will be sent to.  -->
+      <!-- Method: There are two values that you will see this attribute being set to: GET and POST.  -->
+      <p>We charged your credit card ${{ request.session.order_total_cost }}.</p>
+      <p>You have ordered {{ request.session.order_history_quantity }} items so far and spent ${{ request.session.order_history_cost }} with Amadon.com! {{request.session.location}}</p>
+      <a href="/amadon">Go back</a>
+      <a href="/amadon/reset">Reset history</a>
+      <!-- <form class="store_column_form" action='/reset' method='post'>
+        {% csrf_token %}
+        <input type='submit' value='Reset history'/>
+      </form> -->
+    </body>
+</html>
