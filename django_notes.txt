@@ -56,6 +56,12 @@ exit() to quit
 to bring in all your data:
 >>> from apps.{{app_name}}.models import *
 
+13. To create a new empty DB
+  delete db.sqlite3
+  delete all files inside main/apps/first_app/migrations, except init.py
+  run server to recreate a db
+  make migrations
+
 
 Notes
 
@@ -122,5 +128,10 @@ Other methods to retrieve records
   Blog.objects.first().comments.all() - grabs all comments from the first Blog
   Blog.objects.get(id=15).comments.first() - grabs the first comment from Blog id = 15
   Comment.objects.get(id=15).blog.name - returns the name of the blog where Comment id = 15 belongs to
+Edit a user
+  user = User.objects.get(first_name="Zach")
+  user.last_name = "Owens"
+  user.save()
+
 Setting Relationship
   Comment.objects.create(blog=Blog.objects.get(id=1), comment="test") - create a new comment where the comment's blog points to Blog.objects.get(id=1).
