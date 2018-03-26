@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <title>The Wall | {{ request.session.first_name }} {{ request.session.last_name }}</title>
+    <link rel="stylesheet" type="text/css" href="../static/wall.css">
+  </head>
+  <body>
+    <div id="wrapper">
+      <div>
+        {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+              <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+      <div id="header">
+        <p id="headline">Coding Dojo Wall</p>
+        <p id="welcome">Welcome, {{ request.session.first_name }}</p>
+        <div id="log_out_wrapper">
+          <form action='/log_out' method='POST'>
+            <input type="submit" value="log out">
+          </form>
+        </div>
+      </div>
+      <hr>
+      <div id="main_content_wrapper">
+        <div class="post_a_message_wrapper">
+          <h3 id="post_form_headline">Post a message</h3>
+          <form action='/submit_post' method='POST'>
+            <textarea rows="4" cols="100" name="content" id="post_a_message_content"></textarea>
+            <input type="submit" value="Post a message" id="post_a_message_button">
+          </form>
+        </div>
+        <div id="posts_wrapper">
+          <div class="post_wrapper">
+            <p class="name_date_row">Max Wiederholt - March 16, 2018</p>
+            <p class="post_content">Stumptown lomo ugh, photo booth disrupt knausgaard 90's succulents hot chicken beard neutra art party activated charcoal. Humblebrag pitchfork cold-pressed, mlkshk wolf sriracha artisan leggings readymade microdosing whatever tbh. Cray distillery locavore vice neutra ennui gastropub shaman aesthetic tumeric stumptown narwhal cold-pressed post-ironic. Af hammock vexillologist beard craft beer lo-fi, cloud bread prism meh selvage readymade chartreuse wolf. IPhone knausgaard PBR&B, beard godard thundercats fanny pack. Vinyl jean shorts sustainable drinking vinegar tousled paleo. Gochujang street art butcher kinfolk tilde cornhole hashtag.</p>
+          </div>
+          <div class="responsive_posts_wrapper">
+            {% for post in all_posts %}
+              <div class="post_wrapper">
+                <p class="post_name_date_row">{{ post['first_name'] }} {{ post['last_name'] }} - March 16, 2018</p>
+                <p class="post_content">{{ post['message'] }}</p>
+                <div class="responsive_comments_wrapper">
+                  {% for comment in all_comments %}
+                    {% if comment['post_id'] == post['posts_id']: %}
+                      <div class="comment-wrapper">
+                        <p class="comment_name_date_row">{{ comment['first_name'] }} {{ comment['last_name'] }} - March 16, 2018</p>
+                        <p>{{ comment['comment'] }}</p>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                  <div class="post_a_comment_wrapper">
+                    <h3 class="post_a_comment_form_headline">Post a comment</h3>
+                    <form action='/submit_comment' method='POST'>
+                      <textarea rows="3" cols="50" name="content" class="post_a_comment_content"></textarea>
+                      <input type="hidden" name="post_id" value="{{ post['posts_id'] }}">
+                      <input type="submit" value="Post a comment" class="post_a_message_button">
+                    </form>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

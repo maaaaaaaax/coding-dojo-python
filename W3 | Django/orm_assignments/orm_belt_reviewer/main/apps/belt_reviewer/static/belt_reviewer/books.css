@@ -1,0 +1,59 @@
+/* CSS styles for internet-css assignment by Max Wiederholt (max.wiederholt@gmail.com) */
+
+* {
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    font-family: 'Ubuntu', sans-serif;
+}
+/* .main-content {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.random_word_content {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+} */
+.header {
+  display: block;
+  width: 1000px;
+}
+.recent_book_reviews {
+  display: inline-block;
+  width: 400px;
+  margin-top: 20px;
+  margin-left: 20px;
+  vertical-align: top;
+}
+.other_reviews_sidebar {
+  display: inline-block;
+  width: 400px;
+  margin-top: 20px;
+  margin-left: 20px;
+  overflow: scroll;
+  vertical-align: top;
+  height: 300px;
+}
+.success {
+  color: green;
+}
+.header-child {
+  display: inline-block;
+}
+.header_link {
+  margin-left: 20px;
+}
+.other_reviews_sidebar_child {
+  vertical-align: top;
+  display: block;
+  margin-top: 5px;
+}
+.review_wrapper {
+  vertical-align: top;
+  display: block;
+  margin-top: 20px;
+}

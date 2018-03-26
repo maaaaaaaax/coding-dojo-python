@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Reviews</title>
+	<link rel="stylesheet" type="text/css" href="../../static/belt_reviewer/specific.css">
+</head>
+<body>
+	<p class="header-child">Welcome, {{ request.session.first_name }}</p>	
+	<a href='/books'>Home</a>
+	<a href='/books/add'>Add Book and Review</a>
+	<a href='/logout'>Logout</a>
+
+	<p>{{user.username}}</p>
+	<p>{{user.first_name}}</p>
+	<p>{{user.email}}</p>
+	<p>Total Reviews</p>
+
+	<h5>Posted Reviews on the following books:</h5>
+
+	{% for review in reviews  %}
+	<a href="/books/{{review.book.id}}">{{review.book.title}}</a>
+	{% endfor %}
+
+</body>
+</html>

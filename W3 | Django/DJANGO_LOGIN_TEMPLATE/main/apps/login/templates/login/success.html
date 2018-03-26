@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Logged In</title>
+  </head>
+  <body>
+    <div>
+      {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    {% if request.session.source == "sign_up"  %}
+    <div>
+      <p>The user information you entered for {{ request.session.email }} has been stored successsfully.</p>
+    </div>
+    {% else %}
+    <div>
+    <h3>Welcome back!</h3>
+      <p>First Name: {{ request.session.first_name }}</p>
+      <p>Last Name: {{ request.session.last_name }}</p>
+      <p>Email: {{ request.session.email }}</p>
+      <a href="/logout">Logout</a>
+    </div>
+    {% endif %}
+  </body>
+</html>

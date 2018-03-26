@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title>Add Book and Review</title>
+    <link rel="stylesheet" type="text/css" href="../../static/belt_reviewer/specific.css">
+  </head>
+  <body>
+    <div>
+      {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <div class="header">
+      <a class="header-child header_link" href="/books">Home</a>
+      <a class="header-child header_link" href="/books/logout">Logout</a>
+    </div>
+    <h3>{{ book_title }}</h3>  
+    <p>Author: {{ book_author }}</p>
+    <div class="recent_book_reviews">
+      <h3>Reviews</h3>
+      <div class="responsive_reviews_wrapper">
+        {% for review in reviews %}
+          <a href="/users/{{review.user.id}}">{{review.user.username}}</a>
+    			<p>{{review.stars}} stars</p>
+    			<p>{{review.description}}</p>
+          <p>Posted {{review.created_at}}</p>
+
+    			{% if review.user.id == user %}
+    			<a href="/delete/{{review.id}}">Delete this review</a>
+    			{% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="write_review">
+  		<form method="post" action="/books/add/review">
+  			{% csrf_token %}
+  			Add a review: <textarea name="description"></textarea>
+  			Rating <select name="stars">
+  			<option value="5">5</option>
+  			<option value="4">4</option>
+  			<option value="3">3</option>
+  			<option value="2">2</option>
+  			<option value="1">1</option>
+  			</select>
+  			<input type="submit" name="submit" value="Submit Review">
+  		</form>
+  	</div>
+  </body>
+</html>
